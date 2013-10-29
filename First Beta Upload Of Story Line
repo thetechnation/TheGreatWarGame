@@ -1,0 +1,74 @@
+<asl version="540">
+  <include ref="English.aslx" />
+  <include ref="Core.aslx" />
+  <game name="TheGreatWar">
+    <gameid>ecc32ad7-3b07-44cc-990a-b43ee1761c93</gameid>
+    <version>1.0</version>
+    <firstpublished>2013</firstpublished>
+    <author>Peyton.n(thetechnation)</author>
+    <category>RPG</category>
+    <difficulty>Medium</difficulty>
+    <cruelty>Tough</cruelty>
+    <description>You Are joining the military in the time of the great war </description>
+    <showhealth />
+    <menufont>Georgia, serif</menufont>
+    <showscore type="boolean">false</showscore>
+    <defaultfontsize type="int">13</defaultfontsize>
+    <pov type="object">player</pov>
+    <onhealthzero type="script">
+      msg ("You Have Died ")
+      finish
+    </onhealthzero>
+  </game>
+  <object name="HEAD NORTH TO BASE CAMP">
+    <inherit name="editor_room" />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <prefix>SOLDIER</prefix>
+    <suffix>NOW</suffix>
+    <description>Your On A Bus </description>
+    <object name="player">
+      <inherit name="editor_object" />
+      <inherit name="editor_player" />
+      <inherit name="male" />
+      <gender>Male</gender>
+      <take type="boolean">false</take>
+      <maxobjects type="int">10</maxobjects>
+    </object>
+    <exit alias="north" to="Base Camp">
+      <inherit name="northdirection" />
+    </exit>
+  </object>
+  <object name="Base Camp">
+    <inherit name="editor_room" />
+    <description><![CDATA[Your At Base Camp<br/><br/>Pick Your Division <br/><br/>Go North for Airborne <br/><br/>South for Army ]]></description>
+    <exit alias="north" to="Airborne">
+      <inherit name="northdirection" />
+    </exit>
+    <exit alias="south" to="Army">
+      <inherit name="southdirection" />
+    </exit>
+  </object>
+  <object name="Airborne">
+    <inherit name="editor_room" />
+    <description><![CDATA[Welcome to The Airborne division Soldier<br/><br/><br/>you can head north for the bombing crew <br/><br/>south for the paratroopers<br/><br/>and east for suicide bombing  ]]></description>
+    <exit alias="east" to="Sucidebombing">
+      <inherit name="eastdirection" />
+    </exit>
+  </object>
+  <object name="Army">
+    <inherit name="editor_room" />
+  </object>
+  <object name="Sucidebombing">
+    <inherit name="editor_room" />
+    <description>You crash your plan bravely into the heart of the enemy city </description>
+    <object name="DEATH">
+      <inherit name="editor_object" />
+      <use type="script">
+        DecreaseHealth (100)
+      </use>
+    </object>
+    <exit alias="west" to="Airborne">
+      <inherit name="westdirection" />
+    </exit>
+  </object>
+</asl>
